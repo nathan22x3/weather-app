@@ -6,6 +6,8 @@ module.exports = {
   ],
   theme: {
     colors: {
+      transparent: 'transparent',
+      inherit: 'inherit',
       gray: {
         100: '#e7e7eb',
         200: '#a09fb1',

@@ -90,9 +90,9 @@ const Main = () => {
         <Highlight label='Visibility'>
           <p css={tw`mt-1 font-medium text-xl md:text-3xl`}>
             <span css={tw`font-bold text-5xl md:text-6xl`}>
-              {(current?.visibility * 0.0006213712)
+              {(current?.visibility * 0.0006213712 || 0)
                 .toFixed(2)
-                .replace('.', ',') || 0}
+                .replace('.', ',')}
             </span>{' '}
             miles
           </p>

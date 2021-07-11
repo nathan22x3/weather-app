@@ -4,6 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
+::selection {
+  background-color: #e7e7eb;
+  color: #100e1d;
+}
+
 html {
   user-select: none;
   -webkit-tap-highlight-color: transparent;

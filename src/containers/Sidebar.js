@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import tw from 'twin.macro';
 import { formatDate, formatTemprature } from 'utils';
 import { getData, getForecast, getTemperatureScale } from 'weatherSlice';
+import Search from './Search';
 
 const Sidebar = () => {
   const data = useSelector(getData);
@@ -17,6 +18,7 @@ const Sidebar = () => {
   const current = forecast && forecast[0];
 
   const [image, setImage] = useState(null);
+  const [showSearch, setShowSearch] = useState(false);
 
   useEffect(() => {
     try {
@@ -27,12 +29,19 @@ const Sidebar = () => {
     } catch (error) {}
   }, [current]);
 
+  useEffect(() => {
+    document.body.style.overflowY = showSearch ? 'hidden' : '';
+  }, [showSearch]);
+
   return (
     <aside
       css={tw`overflow-hidden relative flex flex-col items-center min-h-screen px-11 py-12 bg-dark-blue-200`}
     >
       <div css={tw`flex justify-between self-stretch mb-16 md:mb-28`}>
-        <Button css={tw`px-4 py-3 rounded-md text-gray-100`}>
+        <Button
+          onClick={() => setShowSearch(true)}
+          css={tw`px-4 py-3 rounded-md text-gray-100`}
+        >
           Search for places
         </Button>
         <Button css={tw`w-10 h-10 rounded-full p-2`}>
@@ -63,6 +72,7 @@ const Sidebar = () => {
         <img src={LocationIcon} alt='Your location:' />
         <span>{data?.city?.name}</span>
       </p>
+      <Search isShow={showSearch} onClose={() => setShowSearch(false)} />
     </aside>
   );
 };
