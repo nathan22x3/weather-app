@@ -1,7 +1,6 @@
 module.exports = {
   purge: [
     './public/index.html',
-    './src/features/**/*.{js,jsx}',
     './src/components/**/*.{js,jsx}',
     './src/containers/**/*.{js,jsx}',
   ],

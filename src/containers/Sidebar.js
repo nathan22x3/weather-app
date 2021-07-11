@@ -1,13 +1,32 @@
 import CloudImage from 'assets/images/cloud-background.png';
 import GpsIcon from 'assets/images/gps.svg';
 import LocationIcon from 'assets/images/location.svg';
-import ShowerImage from 'assets/images/s.png';
 import Button from 'components/Button';
-import React from 'react';
+import { TEMPERATURE_SCALES, WEATHER_STATES } from 'constants/index';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 /** @jsxImportSource @emotion/react */
 import tw from 'twin.macro';
+import { formatDate, formatTemprature } from 'utils';
+import { getData, getForecast, getTemperatureScale } from 'weatherSlice';
 
 const Sidebar = () => {
+  const data = useSelector(getData);
+  const forecast = useSelector(getForecast);
+  const scale = useSelector(getTemperatureScale);
+  const current = forecast && forecast[0];
+
+  const [image, setImage] = useState(null);
+
+  useEffect(() => {
+    try {
+      setImage(
+        require(`assets/images/${WEATHER_STATES[current?.weather[0].main]}.png`)
+          .default
+      );
+    } catch (error) {}
+  }, [current]);
+
   return (
     <aside
       css={tw`overflow-hidden relative flex flex-col items-center min-h-screen px-11 py-12 bg-dark-blue-200`}
@@ -26,16 +45,23 @@ const Sidebar = () => {
           alt='Cloud background'
           css={tw`absolute max-w-none top-[10%] opacity-10 2xl:max-w-full`}
         />
-        <img src={ShowerImage} alt='Shower' />
+        <img src={image} alt={current?.weather[0].main} />
         <p css={tw`font-medium`}>
-          <span css={tw`text-9xl`}>15</span>
-          <span css={tw`text-4xl text-gray-200`}>&#xb0;C</span>
+          <span css={tw`text-9xl`}>
+            {Math.floor(formatTemprature(current?.main.temp, scale)) || 0}
+          </span>
+          <span css={tw`text-4xl text-gray-200`}>
+            &#xb0;{TEMPERATURE_SCALES[scale || 'celsius']}
+          </span>
         </p>
-        <p css={tw`text-4xl text-gray-200`}>Shower</p>
-        <p css={tw`text-lg text-gray-200`}>Today • Fri, 5 Jun</p>
+        <p css={tw`capitalize text-4xl text-gray-200`}>
+          {current?.weather[0].description}
+        </p>
+        <p css={tw`text-lg text-gray-200`}>Today • {formatDate()}</p>
       </div>
       <p css={tw`flex items-center gap-x-2 mt-8`}>
-        <img src={LocationIcon} alt='Your location:' /> Helsinki
+        <img src={LocationIcon} alt='Your location:' />
+        <span>{data?.city?.name}</span>
       </p>
     </aside>
   );

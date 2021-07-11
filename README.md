@@ -60,6 +60,19 @@ Introduce your projects by taking a screenshot or a gif. Try to tell visitors a 
 
 This application/site was created as a submission to a [DevChallenges](https://devchallenges.io/challenges) challenge. The [challenge](https://devchallenges.io/challenges/mM1UIenRhK808W8qmLWv) was to build an application to complete the given user stories.
 
+- [x] **User story**: You can see city weather as default, preferably your current location
+- [ ] **User story**: You can search for city
+- [x] **User story**: You can see weather of today and the next 5 days
+- [x] **User story**: You can see the date and location of the weather
+- [x] **User story**: You can see according to image for each type of weather
+- [x] **User story**: You can see the min and max degree each day
+- [x] **User story**: You can see wind status and wind direction
+- [x] **User story**: You can see humidity percentage
+- [x] **User story**: You can see a visibility indicator
+- [x] **User story**: You can see the air pressure number
+- [ ] **User story**: You can request your current location weather
+- [x] **User story**: You can convert temperature in Celcius to Fahrenheit and vice versa
+
 ## How To Use
 
 <!-- Example: -->

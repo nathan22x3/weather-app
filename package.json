@@ -17,6 +17,8 @@
     "twin.macro": "^2.6.2"
   },
   "scripts": {
+    "predeploy": "yarn build",
+    "deploy": "./deploy.sh",
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
